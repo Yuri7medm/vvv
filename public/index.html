@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Marshall.Networks </title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+    }
+
+    .login-container {
+      width: 300px;
+      margin: 100px auto;
+      padding: 30px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .login-container input,
+    .login-container button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    /* Painel admin no topo direito */
+    .admin-login {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 200px;
+    }
+
+    .admin-login h4 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .admin-login input {
+      width: 100%;
+      margin-bottom: 8px;
+      padding: 6px;
+      font-size: 0.9rem;
+    }
+
+    .admin-login button {
+      width: 100%;
+      padding: 6px;
+      font-size: 0.9rem;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .admin-login button:hover {
+      background-color: #555;
+    }
+
+    #admin-msg {
+      font-size: 0.8rem;
+      color: red;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Painel de login principal -->
+  <div class="login-container">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p id="msg" style="color: red; text-align: center; margin-top: 1rem;"></p>
+    <p>Don't have an account? <a href="register.html">Create one</a></p>
+  </div>
+
+  <!-- Painel de admin minimalista -->
+  <div class="admin-login">
+    <h4>Admin Access</h4>
+    <input type="text" id="admin-username" placeholder="Admin user" />
+    <input type="password" id="admin-password" placeholder="Password" />
+    <button onclick="adminLogin()">Enter</button>
+    <div id="admin-msg"></div>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!username || !password) {
+        document.getElementById("msg").textContent = "Please fill out both fields.";
+        return;
+      }
+
+      fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            localStorage.setItem('user', JSON.stringify(data.user));
+            // Redireciona conforme o usuário
+            if (data.user.username === 'admin') {
+              window.location.href = "admin-panel.html";
+            } else {
+              window.location.href = "home.html";
+            }
+          } else {
+            document.getElementById("msg").textContent = data.message || "Login failed.";
+          }
+        })
+        .catch((error) => {
+          document.getElementById("msg").textContent = "Server error. Please try again.";
+          console.error("Login error:", error);
+        });
+    }
+
+    function adminLogin() {
+      const username = document.getElementById("admin-username").value.trim();
+      const password = document.getElementById("admin-password").value.trim();
+
+      if (!username || !password) {
+        document.getElementById("admin-msg").textContent = "Fields required.";
+        return;
+      }
+
+      fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && data.user.username === "admin") {
+            localStorage.setItem('user', JSON.stringify(data.user));
+            window.location.href = "admin-panel.html";
+          } else {
+            document.getElementById("admin-msg").textContent = "Invalid admin credentials.";
+          }
+        })
+        .catch(err => {
+          document.getElementById("admin-msg").textContent = "Server error.";
+          console.error(err);
+        });
+    }
+  </script>
+</body>
+</html>

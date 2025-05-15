@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home - Marshall.Networks</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Estilo geral da página */
+    body {
+      font-family: Arial, sans-serif;
+      background: url('https://via.placeholder.com/1920x1080/cccccc/000000?text=Background+Image') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      margin: 0;
+      height: 100vh;
+    }
+
+    /* Estilo do cabeçalho */
+    header {
+      background-color: rgba(72, 178, 143, 0.8);  /* Verde menta suave */
+      text-align: center;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      left: 0;
+      display: flex;
+      justify-content: center; /* Centraliza horizontalmente */
+      align-items: center; /* Centraliza verticalmente */
+      flex-direction: column; /* Organiza o título e menu em uma coluna */
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: #fff;
+      margin: 0;
+    }
+
+    /* Menu centralizado */
+    nav {
+      display: flex;
+      justify-content: center;  /* Centraliza os itens */
+      align-items: center;      /* Centraliza verticalmente */
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    nav a {
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+      padding: 10px 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #60b49f;  /* Verde menta mais intenso */
+      border-radius: 5px;
+    }
+
+    /* Seção de boas-vindas */
+    .home-welcome {
+      text-align: center;
+      margin-top: 150px; /* Ajusta a margem superior para afastar a seção do topo */
+      background-color: rgba(240, 248, 255, 0.8);  /* Azul claro e suave */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;  /* Garante que a seção ocupe 100% da largura disponível */
+    }
+
+    #userWelcome {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #333;  /* Cor ajustada para ser visível */
+      margin-top: 20px;
+    }
+
+    .home-welcome p {
+      color: #333; /* Ajuste da cor para o texto ser legível */
+      font-size: 1.2rem;
+      color: #555;  /* Mais contrastante para boa leitura */
+      max-width: 700px;
+      margin: 20px auto;
+    }
+
+    /* Estilo do botão de logout */
+    .logout-btn {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #48b28f;  /* Verde menta */
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+    }
+
+    .logout-btn:hover {
+      background-color: #3b9e76;  /* Verde menta mais escuro */
+    }
+
+    /* Estilo para o rodapé */
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: rgba(72, 178, 143, 0.8);  /* Verde menta suave */
+      color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Marshall.Networks</h1>
+      <nav>
+        <a href="home.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <section class="home-welcome">
+      <!-- Exibe o "Hello, [username]" centralizado -->
+      <div id="userWelcome"></div>
+      <p>
+        Discover high-quality products at the best prices. Explore our latest arrivals and enjoy a smooth shopping experience.
+      </p>
+
+      <!-- Botão de logout centralizado -->
+      <button onclick="logout()" class="logout-btn">Logout</button>
+    </section>
+  </div>
+
+  <footer>
+    &copy; 2025 Marshall.Networks. All rights reserved.
+  </footer>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      window.location.href = "index.html";
+    } else {
+      document.getElementById('userWelcome').innerText = `Hello, ${user.username}!`;
+    }
+
+    function logout() {
+      localStorage.removeItem('user');
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

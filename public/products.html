@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products - Marshall.Networks</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Imagem de fundo para a página */
+    body {
+      background: url('https://via.placeholder.com/1920x1080/cccccc/000000?text=Background+Image') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      font-family: Arial, sans-serif;
+      padding-top: 100px;  /* Espaço para o cabeçalho fixo */
+      padding-bottom: 60px; /* Espaço para o rodapé fixo */
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* Estilo do cabeçalho */
+    header {
+      background-color: rgba(72, 178, 143, 0.8);  /* Verde menta suave */
+      text-align: center;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: #fff;
+      margin: 0;
+    }
+
+    /* Menu centralizado */
+    nav {
+      display: flex;
+      justify-content: center;  /* Centraliza os itens */
+      align-items: center;      /* Centraliza verticalmente */
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    nav a {
+      color: white;
+      font-size: 1.2rem;
+      text-decoration: none;
+      padding: 10px 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #60b49f;  /* Verde menta mais intenso */
+      border-radius: 5px;
+    }
+
+    /* Seção do conteúdo */
+    section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(240, 248, 255, 0.8);  /* Azul claro e suave */
+      border-radius: 10px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+      margin-top: 100px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #48b28f; /* Verde menta */
+    }
+
+    .product-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .product-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      text-align: center;
+      width: 250px;
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .product-card h2 {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .product-card p {
+      font-size: 1rem;
+      color: #48b28f;  /* Verde menta */
+    }
+
+    .product-card button {
+      background-color: #48b28f;  /* Verde menta */
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .product-card button:hover {
+      background-color: #3b9e76;  /* Verde menta mais escuro */
+    }
+
+    /* Rodapé fixo */
+    footer {
+      text-align: center;
+      background-color: rgba(72, 178, 143, 0.8); /* Verde menta */
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      color: white;
+      z-index: 1000;
+      box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Marshall.Networks</h1>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="cart.html">Cart</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2 class="section-title">Products</h2>
+    <div class="product-grid">
+      <!-- Product cards -->
+      <div class="product-card">
+        <img src="img_0007_14.jpg" alt="Product 1" />
+        <h2>Product 1</h2>
+        <p>$19.99</p>
+        <button onclick="addToCart('Product 1', 19.99, 'img_0007_14.jpg')">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="img_0020_2_7.jpg" alt="Product 2" />
+        <h2>Product 2</h2>
+        <p>$29.99</p>
+        <button onclick="addToCart('Product 2', 29.99, 'img_0020_2_7.jpg')">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="img_0006-2_5_3.jpg" alt="Product 3" />
+        <h2>Product 3</h2>
+        <p>$39.99</p>
+        <button onclick="addToCart('Product 3', 39.99, 'img_0006-2_5_3.jpg')">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Marshall.Networks. All rights reserved.
+  </footer>
+
+  <script>
+    function addToCart(name, price, image) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ name, price, image });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(name + ' added to cart!');
+    }
+  </script>
+</body>
+</html>

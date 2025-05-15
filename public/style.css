@@ -1,0 +1,357 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  padding-top: 100px;  /* Espaço para o header fixo */
+  padding-bottom: 60px; /* Espaço para o footer fixo */
+  min-height: 100vh;
+  background: url('https://via.placeholder.com/1920x1080/cccccc/000000?text=Background+Image') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* HEADER FIXO */
+header {
+  background-color: #343a40;
+  color: white;
+  padding: 1.2rem;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* MENU */
+nav {
+  margin-top: 0.5rem;
+}
+
+nav a {
+  color: #ddd;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* SEÇÃO */
+section {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* PRODUTOS */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.02);
+}
+
+.product-card img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.product-card h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-card p {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.product-card button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.product-card button:hover {
+  background-color: #218838;
+}
+
+/* CARRINHO */
+.cart {
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.cart ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cart li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart button.remove {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* TABELA AVANÇADA DO CARRINHO */
+.advanced-cart table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.advanced-cart th,
+.advanced-cart td {
+  border-bottom: 1px solid #ddd;
+  padding: 1rem;
+  text-align: center;
+}
+
+.advanced-cart img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+  transition: transform 0.3s;
+}
+
+.advanced-cart img:hover {
+  transform: scale(1.05);
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-summary {
+  text-align: right;
+  margin-top: 2rem;
+}
+
+.cart-summary h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.checkout-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #0056b3;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* PÁGINA DE LOGIN */
+.login-container {
+  max-width: 400px;
+  margin: 4rem auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #343a40;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-container button:hover {
+  background-color: #0056b3;
+}
+
+.login-container p {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.login-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-container a:hover {
+  text-decoration: underline;
+}
+
+/* HOME BEM-VINDO */
+.home-welcome {
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.welcome-text {
+  font-size: 1.25rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.logout-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #c82333;
+}
+
+/* FOOTER FIXO */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: rgba(72, 178, 143, 0.85);
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+}
+
+/* Título da seção "Products" fixo */
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #48b28f; /* Verde menta */
+  position: sticky;  /* Tornando o cabeçalho da seção fixo */
+  top: 0;
+  background-color: rgba(240, 248, 255, 0.8);  /* Transparente para o fundo ainda ser visível */
+  padding: 10px 0;   /* Para garantir que o título tenha um espaço */
+  z-index: 500;  /* Z-index para garantir que o título fique acima do conteúdo */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Sombrinha leve */
+}
+/* Estilo do cabeçalho fixo */
+header {
+  background-color: rgba(72, 178, 143, 0.8);  /* Verde menta suave */
+  text-align: center;
+  padding: 20px;
+  position: fixed;  /* Torna o cabeçalho fixo */
+  top: 0;
+  left: 0;
+  width: 100%;  /* Garante que o cabeçalho ocupe toda a largura da tela */
+  z-index: 1000;  /* Garante que o cabeçalho fique acima de outros conteúdos */
+}
+
+nav {
+  display: flex;
+  justify-content: center;  /* Centraliza os itens */
+  align-items: center;      /* Centraliza verticalmente */
+  gap: 30px;
+  margin-top: 20px;
+}
+
+nav a {
+  color: white;
+  font-size: 1.2rem;
+  text-decoration: none;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #60b49f;  /* Verde menta mais intenso */
+  border-radius: 5px;
+}
+
+body {
+  margin-top: 100px;  /* Adiciona um espaço suficiente para o conteúdo não ficar atrás do cabeçalho */
+}
