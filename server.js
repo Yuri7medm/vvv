@@ -1,17 +1,17 @@
-﻿const express = require('express');
+const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const db = new sqlite3.Database(path.join(__dirname, 'data', 'store.db'));
+const db = new sqlite3.Database(path.join(__dirname, 'data', 'store.db')); // Banco de dados aqui
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Criar a tabela de usuários, se não existir
+// Criação da tabela de usuários (se não existir)
 db.serialize(() => {
   db.run(`CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,7 +32,7 @@ app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).json({ success: false, message: "Username and password are required" });
+    return res.status(400).json({ success: false, message: "Username e senha são obrigatórios" });
   }
 
   db.get("SELECT * FROM users WHERE username = ? OR email = ?", [username, username], async (err, user) => {
@@ -48,7 +48,7 @@ app.post('/api/login', (req, res) => {
 
       res.json({ success: true, user: { id: user.id, username: user.username } });
     } catch (error) {
-      return res.status(500).json({ success: false, message: "Erro ao verificar a senha" });
+      res.status(500).json({ success: false, message: "Erro ao verificar a senha" });
     }
   });
 });
@@ -81,7 +81,7 @@ app.post('/api/register', async (req, res) => {
         }
       );
     } catch (error) {
-      return res.status(500).json({ success: false, message: "Erro ao processar a senha" });
+      res.status(500).json({ success: false, message: "Erro ao processar a senha" });
     }
   });
 });
@@ -113,7 +113,7 @@ app.delete('/api/users/:id', (req, res) => {
   });
 });
 
-// Atualizar senha do usuário
+// Atualizar senha
 app.put('/api/users/:id/password', async (req, res) => {
   const userId = req.params.id;
   const { password } = req.body;
@@ -152,7 +152,7 @@ app.get('/api/products', (req, res) => {
 });
 
 // Iniciar servidor
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
